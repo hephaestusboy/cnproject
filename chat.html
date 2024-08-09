@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp-like Chat</title>
+    <link rel="stylesheet" href="chat.css">
+</head>
+<body>
+    <div id="chatApp">
+        <!-- Sidebar for contacts and settings -->
+        <aside id="sidebar">
+            <header>
+                <div id="profile">
+                    <img src="default-profile.jpg" alt="Profile Picture" id="profilePic">
+                    <div id="profileInfo">
+                        <h2 id="userName">John Doe</h2>
+                        <p id="status">Online</p>
+                    </div>
+                </div>
+                <button id="settingsBtn">⚙️</button>
+            </header>
+            <input type="text" id="searchBar" placeholder="Search...">
+            <ul id="contacts">
+                <!-- Contacts list will be dynamically populated here -->
+            </ul>
+        </aside>
+        
+        <!-- Chat area -->
+        <div id="chatArea">
+            <header id="chatHeader">
+                <h2 id="chatTitle">Select a Contact</h2>
+                <button onclick="window.location.href='index.html';">Sign Out</button>
+            </header>
+            
+            <div id="messages">
+                <!-- Messages will be dynamically populated here -->
+            </div>
+            <div id="inputArea">
+                <input type="text" id="messageInput" placeholder="Type a message...">
+                <button id="sendBtn">Send</button>
+                <button id="emojiBtn">😊</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="chat.js"></script>
+</body>
+</html>
