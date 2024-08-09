@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign in || Sign up form</title>
+    <title>Sign In || Sign Up Form</title>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <!-- CSS Stylesheet -->
@@ -23,11 +23,9 @@
                 <input type="text" placeholder="Name" name="name" required />
                 <input type="email" placeholder="Email" name="email" required />
                 <input type="password" placeholder="Password" name="password" required />
-                <button type="submit">Sign In</button>
-
-               
+                <button type="submit">Sign Up</button>
             </form>
-        </div>>
+        </div>
         <div class="form-container sign-in-container">
             <form action="http://localhost:5000/signin" method="POST" id="signinForm">
                 <h1>Sign in</h1>
@@ -72,37 +70,64 @@
         signInButton.addEventListener('click', () => {
             container.classList.remove('right-panel-active');
         });
-        document.getElementById('signinForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const email = e.target.email.value;
-    const password = e.target.password.value;
 
-    try {
-        const response = await fetch('http://localhost:5000/signin', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email, password }),
+        document.getElementById('signinForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = e.target.email.value;
+            const password = e.target.password.value;
+
+            try {
+                const response = await fetch('http://localhost:5000/signin', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password }),
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert('Sign in successful');
+                    localStorage.setItem('token', data.token); // Store token if necessary
+                    window.location.href = 'chat.html'; // Redirect to the chat page
+                } else {
+                    alert(data.message || 'Sign in failed');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred during sign-in.');
+            }
         });
 
-        const data = await response.json();
+        document.getElementById('signupForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = e.target.name.value;
+            const email = e.target.email.value;
+            const password = e.target.password.value;
 
-        if (response.ok) {
-            alert('Sign in successful');
-            localStorage.setItem('token', data.token); // Store token if necessary
-            window.location.href = 'chat.html'; // Redirect to the chat page
-        } else {
-            alert(data.message || 'Sign in failed');
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        alert('An error occurred during sign-in.');
-    }
-});
+            try {
+                const response = await fetch('http://localhost:5000/signup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ name, email, password }),
+                });
 
+                const data = await response.json();
 
-
+                if (response.ok) {
+                    alert('Sign up successful');
+                    window.location.href = 'chat.html'; // Redirect to the chat page
+                } else {
+                    alert(data.message || 'Sign up failed');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred during sign-up.');
+            }
+        });
     </script>
 </body>
 </html>
