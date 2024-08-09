@@ -23,11 +23,11 @@
                 <input type="text" placeholder="Name" name="name" required />
                 <input type="email" placeholder="Email" name="email" required />
                 <input type="password" placeholder="Password" name="password" required />
-                <button type="submit">Sign Up
-                     
-                </button>
+                <button type="submit">Sign In</button>
+
+               
             </form>
-        </div>
+        </div>>
         <div class="form-container sign-in-container">
             <form action="http://localhost:5000/signin" method="POST" id="signinForm">
                 <h1>Sign in</h1>
@@ -90,9 +90,8 @@
 
         if (response.ok) {
             alert('Sign in successful');
-            // You can store the token in localStorage or cookies if you want
-            localStorage.setItem('token', data.token);
-            // Redirect or update UI as needed
+            localStorage.setItem('token', data.token); // Store token if necessary
+            window.location.href = 'chat.html'; // Redirect to the chat page
         } else {
             alert(data.message || 'Sign in failed');
         }
@@ -101,6 +100,8 @@
         alert('An error occurred during sign-in.');
     }
 });
+
+
 
     </script>
 </body>
