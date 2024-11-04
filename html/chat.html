@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -256,6 +256,27 @@
                 document.getElementById('profileSummaryStatus').textContent = newStatus;
             }
         });
+    </script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io();
+    
+      // Assuming you have a form with id 'chat-form' and an input with id 'message-input'
+      document.getElementById('chat-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const messageInput = document.getElementById('message-input');
+        if (messageInput.value) {
+          socket.emit('chat message', messageInput.value);
+          messageInput.value = '';
+        }
+      });
+    
+      socket.on('chat message', function(msg) {
+        const messagesContainer = document.getElementById('messages');
+        const messageElement = document.createElement('li');
+        messageElement.textContent = msg;
+        messagesContainer.appendChild(messageElement);
+      });
     </script>
 </body>
 
